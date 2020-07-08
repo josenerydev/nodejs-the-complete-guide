@@ -6,26 +6,15 @@ const person = {
   }
 };
 
-// Spread Operator
-const copiedPerson = { ...person };
-console.log(copiedPerson);
+const printName = ({ name }) => {
+  console.log(name);
+}
+
+printName(person);
+
+const { name, age } = person;
+console.log(name, age);
 
 const hobbies = ['Sports', 'Cooking'];
-
-// for (const hobby of hobbies) {
-//   console.log(hobby);
-// }
-// console.log(hobbies.map(hobby => 'Hobby: ' + hobby));
-
-// console.log(hobbies);
-// const copiedArray = hobbies.slice();
-// Spread Operator
-const copiedArray = [...hobbies];
-console.log(copiedArray);
-
-// rest operator
-const toArray = (...args) => {
-  return args;
-};
-
-console.log(toArray(1, 2, 3, 4));
+const [hobby1, hobby2] = hobbies;
+console.log(hobby1, hobby2);
