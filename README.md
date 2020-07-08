@@ -1,0 +1,2 @@
+- MDN JavaScript Tutorial: [https://developer.mozilla.org/en-US/docs/Learn/JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
+- Academind JS Resources: [https://academind.com/learn/javascript](https://academind.com/learn/javascript)
