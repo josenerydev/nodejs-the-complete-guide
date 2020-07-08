@@ -1,2 +1,3 @@
-- MDN JavaScript Tutorial: [https://developer.mozilla.org/en-US/docs/Learn/JavaScript](https://developer.mozilla.org/en-US/docs/Learn/JavaScript)
-- Academind JS Resources: [https://academind.com/learn/javascript](https://academind.com/learn/javascript)
+# Sobre este curso
+
+Master Node JS & Deno.js, build REST APIs with Node.js, GraphQL APIs, add Authentication, use MongoDB, SQL & much more!
