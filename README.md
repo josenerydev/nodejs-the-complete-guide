@@ -5,6 +5,8 @@ npm install nodemon --save-dev
 npm install nodemon --save
 npm install nodemon -g
 npm install
+npm install --save body-parser
+npm install --save express
 
 ## Types of Errors
 
