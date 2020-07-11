@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+main {
+  margin: 0 0.5rem;
+}
+
+.main-header {
+  width: 100%;
+  background: red;
+  display: flex;
+}
+
+.main-header__itens {
+  display: flex;
+}
+
+.main-header__item {
+  list-style: none;
+  padding: 0 1rem;
+}
+
+.main-header__item a {
+  text-decoration: none;
+  color: black;
+}
+
+.main-header__item a:hover,
+.main-header__item a:active,
+.main-header__item a.active {
+  color: white;
+  cursor: pointer;
+}
