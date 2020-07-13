@@ -15,7 +15,7 @@ npm install --save express
 - Logical Errors (the app not behavior correctly, no message error)
 
 node.js debug  
-F5, select node.js enviroment
+F5, select node.js environment
 lauch.json config
 You have to install nodemon globally
 
