@@ -1,16 +1,1 @@
-[
-  {
-    "title": "A book",
-    "imageUrl": "https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg",
-    "description": "rwqerqw",
-    "price": "500",
-    "id": "0.5544044592338824"
-  },
-  {
-    "title": "Empire State",
-    "imageUrl": "https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg",
-    "description": "assssssssss",
-    "price": "1000",
-    "id": "0.6861004371323198"
-  }
-]
+[{"title":"A book","imageUrl":"https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg","description":"rwqerqw","price":"500","id":"0.5544044592338824"},{"title":"Empire State","imageUrl":"https://www.publicdomainpictures.net/pictures/10000/velka/1-1210009435EGmE.jpg","description":"assssssssss","price":"1000","id":"0.6861004371323198"},{"title":"","imageUrl":"","description":"","price":"","id":"0.07504152901150807"},{"title":"","imageUrl":"","description":"","price":"","id":"0.6520880569936045"},{"title":"","imageUrl":"","description":"","price":"","id":"0.7608662109889563"},{"title":"","imageUrl":"","description":"","price":"","id":"0.1982714109096264"},{"title":"","imageUrl":"","description":"","price":"","id":"0.9695015444708619"},{"title":"","imageUrl":"","description":"","price":"","id":"0.0947924560422928"}]
