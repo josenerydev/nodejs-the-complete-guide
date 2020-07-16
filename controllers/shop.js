@@ -24,9 +24,7 @@ exports.getProduct = (req, res, next) => {
         path: '/products'
       });
     })
-    .catch(err => {
-      console.log(err);
-    })
+    .catch(err => console.log(err));
 };
 
 exports.getIndex = (req, res, next) => {
@@ -44,17 +42,19 @@ exports.getIndex = (req, res, next) => {
 };
 
 exports.getCart = (req, res, next) => {
-  console.log(req.user.cart);
-  req.user.getCart()
+  req.user
+    .getCart()
     .then(cart => {
-      return cart.getProducts();
-    })
-    .then(products => {
-      res.render('shop/cart', {
-        path: '/cart',
-        pageTitle: 'Your Cart',
-        products: products
-      });
+      return cart
+        .getProducts()
+        .then(products => {
+          res.render('shop/cart', {
+            path: '/cart',
+            pageTitle: 'Your Cart',
+            products: products
+          });
+        })
+        .catch(err => console.log(err));
     })
     .catch(err => console.log(err));
 };
@@ -63,7 +63,8 @@ exports.postCart = (req, res, next) => {
   const prodId = req.body.productId;
   let fetchedCart;
   let newQuantity = 1;
-  req.user.getCart()
+  req.user
+    .getCart()
     .then(cart => {
       fetchedCart = cart;
       return cart.getProducts({ where: { id: prodId } });
@@ -73,12 +74,13 @@ exports.postCart = (req, res, next) => {
       if (products.length > 0) {
         product = products[0];
       }
+
       if (product) {
         const oldQuantity = product.cartItem.quantity;
         newQuantity = oldQuantity + 1;
         return product;
       }
-      return Product.findByPk(prodId)
+      return Product.findByPk(prodId);
     })
     .then(product => {
       return fetchedCart.addProduct(product, {
@@ -93,7 +95,8 @@ exports.postCart = (req, res, next) => {
 
 exports.postCartDeleteProduct = (req, res, next) => {
   const prodId = req.body.productId;
-  req.user.getCart()
+  req.user
+    .getCart()
     .then(cart => {
       return cart.getProducts({ where: { id: prodId } });
     })
@@ -108,19 +111,28 @@ exports.postCartDeleteProduct = (req, res, next) => {
 };
 
 exports.postOrder = (req, res, next) => {
-  req.user.getCart()
+  let fetchedCart;
+  req.user
+    .getCart()
     .then(cart => {
+      fetchedCart = cart;
       return cart.getProducts();
     })
     .then(products => {
-      return req.user.createOrder()
+      return req.user
+        .createOrder()
         .then(order => {
-          return order.addProducts(products.map(product => {
-            product.orderItem = { quantity: product.cartItem.quantity };
-            return product;
-          }));
+          return order.addProducts(
+            products.map(product => {
+              product.orderItem = { quantity: product.cartItem.quantity };
+              return product;
+            })
+          );
         })
         .catch(err => console.log(err));
+    })
+    .then(result => {
+      return fetchedCart.setProducts(null);
     })
     .then(result => {
       res.redirect('/orders');
@@ -129,15 +141,15 @@ exports.postOrder = (req, res, next) => {
 };
 
 exports.getOrders = (req, res, next) => {
-  res.render('shop/orders', {
-    path: '/orders',
-    pageTitle: 'Your Orders'
-  });
-};
-
-exports.getCheckout = (req, res, next) => {
-  res.render('shop/checkout', {
-    path: '/checkout',
-    pageTitle: 'Checkout'
-  })
+  req.user
+    .getOrders({ include: ['products'] })
+    .then(orders => {
+      console.log(orders.products);
+      res.render('shop/orders', {
+        path: '/orders',
+        pageTitle: 'Your Orders',
+        orders: orders
+      });
+    })
+    .catch(err => console.log(err));
 };
