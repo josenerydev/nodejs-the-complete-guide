@@ -10,13 +10,8 @@ exports.getAddProduct = (req, res, next) => {
 
 exports.postAddProduct = (req, res, next) => {
   const { title, imageUrl, description, price } = req.body;
-  req.user
-    .createProduct({
-      title: title,
-      price: price,
-      imageUrl: imageUrl,
-      description: description,
-    })
+  const product = new Product(title, price, description, imageUrl)
+    .save()
     .then((result) => {
       res.redirect("/admin/products");
     })
