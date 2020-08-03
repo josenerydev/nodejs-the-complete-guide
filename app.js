@@ -22,7 +22,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(errorController.get404);
 
-mongoConnect((client) => {
-  console.log(client);
+mongoConnect(() => {
   app.listen(3000);
 });
