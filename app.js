@@ -22,6 +22,27 @@ const store = new MongoDBStore({
 });
 const csrfProtection = csrf();
 
+const fileStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "images");
+  },
+  filename: (req, file, cb) => {
+    cb(null, new Date().toISOString() + "-" + file.originalname);
+  },
+});
+
+const fileFilter = (req, file, cb) => {
+  if (
+    file.mimetype === "image/png" ||
+    file.mimetype === "image/jpg" ||
+    file.mimetype === "image/jpeg"
+  ) {
+    cb(null, true);
+  } else {
+    cb(null, false);
+  }
+};
+
 app.set("view engine", "ejs");
 app.set("views", "views");
 
@@ -30,7 +51,9 @@ const shopRoutes = require("./routes/shop");
 const authRoutes = require("./routes/auth");
 
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(multer({ dest: "images" }).single("image"));
+app.use(
+  multer({ storage: fileStorage, fileFilter: fileFilter }).single("image")
+);
 app.use(express.static(path.join(__dirname, "public")));
 app.use(
   session({
@@ -76,7 +99,6 @@ app.get("/500", errorController.get500);
 app.use(errorController.get404);
 
 app.use((error, req, res, next) => {
-  // res.redirect("/500");
   res.status(500).render("500", {
     pageTitle: "Error!",
     path: "/500",
