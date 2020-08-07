@@ -14,7 +14,8 @@ exports.getAddProduct = (req, res, next) => {
 };
 
 exports.postAddProduct = (req, res, next) => {
-  const { title, price, description, imageUrl } = req.body;
+  const { title, price, description, image } = req.body;
+  console.log("############################", image);
   console.log(req.user);
 
   const errors = validationResult(req);
@@ -26,7 +27,7 @@ exports.postAddProduct = (req, res, next) => {
       hasError: true,
       product: {
         title: title,
-        imageUrl: imageUrl,
+        imageUrl: image,
         price: price,
         description: description,
       },
@@ -39,7 +40,7 @@ exports.postAddProduct = (req, res, next) => {
     title: title,
     price: price,
     description: description,
-    imageUrl: imageUrl,
+    imageUrl: image,
     userId: req.user,
   });
   product
@@ -116,7 +117,6 @@ exports.postEditProduct = (req, res, next) => {
       product.description = description;
       product.imageUrl = imageUrl;
       return product.save().then((result) => {
-        console.log("UPDATED PRODUCT!");
         res.redirect("/admin/products");
       });
     })
@@ -130,7 +130,6 @@ exports.postEditProduct = (req, res, next) => {
 exports.getProducts = (req, res, next) => {
   Product.find({ userId: req.user._id })
     .then((products) => {
-      console.log(products);
       res.render("admin/products", {
         prods: products,
         pageTitle: "Admin Products",
