@@ -22,6 +22,12 @@ exports.createPost = (req, res, next) => {
 
   res.status(201).json({
     message: "Post created successfully!",
-    post: { id: Date.now().toString(), title: title, content: content },
+    post: {
+      _id: Date.now().toString(),
+      title: title,
+      content: content,
+      creator: { name: "José Ângelo" },
+      createdAt: new Date(),
+    },
   });
 };
