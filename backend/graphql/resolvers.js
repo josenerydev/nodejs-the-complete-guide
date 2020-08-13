@@ -105,8 +105,8 @@ module.exports = {
     return {
       ...createdPost._doc,
       _id: createdPost._id.toString(),
-      createdAt: createdPost.createdAt.toISOString(),
-      updatedAt: createdPost.updatedAt.toISOString(),
+      createdAt: createdPost.createdAt.toString(),
+      updatedAt: createdPost.updatedAt.toString(),
     };
   },
   posts: async function ({ page }, req) {
@@ -133,8 +133,8 @@ module.exports = {
         return {
           ...p._doc,
           _id: p._id.toString(),
-          createdAt: p.createdAt.toISOString(),
-          updatedAt: p.updatedAt.toISOString(),
+          createdAt: p.createdAt.toString(),
+          updatedAt: p.updatedAt.toString(),
         };
       }),
       totalPosts: totalPosts,
