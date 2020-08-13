@@ -59,12 +59,14 @@ class App extends Component {
   loginHandler = (event, authData) => {
     event.preventDefault();
     const graphqlQuery = {
-      query: `query UserLogin($email: String!, $password: String!){
-        login(email: $email, password: $password) {
-          token
-          userId
+      query: `
+        query UserLogin($email: String!, $password: String!) {
+          login(email: $email, password: $password) {
+            token
+            userId
+          }
         }
-      }`,
+      `,
       variables: {
         email: authData.email,
         password: authData.password,
@@ -97,8 +99,8 @@ class App extends Component {
           authLoading: false,
           userId: resData.data.login.userId,
         });
-        localStorage.setItem("token", resData.token);
-        localStorage.setItem("userId", resData.userId);
+        localStorage.setItem("token", resData.data.login.token);
+        localStorage.setItem("userId", resData.data.login.userId);
         const remainingMilliseconds = 60 * 60 * 1000;
         const expiryDate = new Date(
           new Date().getTime() + remainingMilliseconds
@@ -121,12 +123,12 @@ class App extends Component {
     this.setState({ authLoading: true });
     const graphqlQuery = {
       query: `
-      mutation CreateNewUser($email: String!, $name: String!, $password: String!) {
-        createUser(userInput: {email: $email, name: $name, password: $password}) {
-          _id
-          email
+        mutation CreateNewUser($email: String!, $name: String!, $password: String!) {
+          createUser(userInput: {email: $email, name: $name, password: $password}) {
+            _id
+            email
+          }
         }
-      }
       `,
       variables: {
         email: authData.signupForm.email.value,
