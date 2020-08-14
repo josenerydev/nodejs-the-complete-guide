@@ -8,6 +8,7 @@ const MongoDBStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
 const multer = require('multer');
+const helmet = require('helmet');
 
 const errorController = require('./controllers/error');
 const User = require('./models/user');
@@ -18,6 +19,8 @@ console.log(process.env.NODE_ENV);
 const MONGODB_URI = process.env.MONGODB_URI;
 
 const app = express();
+app.use(helmet());
+
 const store = new MongoDBStore({
   uri: MONGODB_URI,
   collection: 'sessions',
