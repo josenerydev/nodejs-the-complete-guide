@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Complete Node.js Guide",
   "main": "app.js",
+  "engines": {
+    "node": "12.16.1"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "SET NODE_ENV=production && SET MONGODB_URI=mongodb+srv://josenerydev:K5E5977guVRKTu54@cluster0.ol3ev.mongodb.net/shop && SET STRIPE_KEY=sk_test_51HDkAxK1SYiCtfX5xeryE3IFAcSQCrA7IDa791Ko75e && node app.js",
