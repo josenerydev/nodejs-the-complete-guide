@@ -1,5 +1,6 @@
 const expect = require("chai").expect;
 const sinon = require("sinon");
+const mongoose = require("mongoose");
 
 const User = require("../models/user");
 const AuthController = require("../controllers/auth");
@@ -20,5 +21,23 @@ describe("Auth Controller - Login", function () {
       done();
     });
     User.findOne.restore();
+  });
+
+  it("should send a response with a valid user status for an existing user", function (done) {
+    mongoose
+      .connect(
+        "mongodb+srv://josenerydev:EPVtuLrgQIDyeV2W@cluster0.ol3ev.mongodb.net/test-messages?retryWrites=true"
+      )
+      .then((result) => {
+        const user = new User({
+          email: "test@test.com",
+          password: "tester",
+          name: "Test",
+          posts: [],
+        });
+        return user.save();
+      })
+      .then(() => {})
+      .catch((err) => console.log(err));
   });
 });
