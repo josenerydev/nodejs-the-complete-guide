@@ -8,7 +8,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "SET NODE_ENV=production && SET MONGODB_URI=mongodb+srv://josenerydev:K5E5977guVRKTu54@cluster0.ol3ev.mongodb.net/shop && SET STRIPE_KEY=sk_test_51HDkAxK1SYiCtfX5xeryE3IFAcSQCrA7IDa791Ko75e && node app.js",
+    "start": "node app.js",
     "start-server": "node app.js",
     "prettier": "npx prettier --write .",
     "start:dev": "nodemon app.js"
