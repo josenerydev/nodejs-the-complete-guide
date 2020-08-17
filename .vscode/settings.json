@@ -7,4 +7,6 @@
   "[typescriptreact]": {
     "editor.defaultFormatter": "denoland.vscode-deno",
   },
+  "deno.import_map": "./path/to/import_map.json",
+  "deno.unstable": false,
 }
