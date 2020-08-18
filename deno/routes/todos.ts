@@ -10,8 +10,6 @@ interface Todo {
   text: string;
 }
 
-let todos: Todo[] = [];
-
 router.get("/todos", async (ctx) => {
   const todos = await getDb().collection("todos").find();
   const transformedTodos = todos.map(
@@ -36,20 +34,22 @@ router.post("/todos", async (ctx) => {
 });
 
 router.put("/todos/:todoId", async (ctx) => {
-  const tid = ctx.params.todoId;
+  const tid = ctx.params.todoId!;
   const data = await ctx.request.body().value;
-  const todoIndex = todos.findIndex((todo) => {
-    return todo.id === tid;
-  });
-  todos[todoIndex] = { id: todos[todoIndex].id, text: data.text };
+
+  await getDb().collection("todos").updateOne(
+    { _id: ObjectId(tid) },
+    { $set: { text: data.text } },
+  );
+
   ctx.response.body = { message: "Updated todo" };
 });
 
-router.delete("/todos/:todoId", (ctx) => {
-  const tid = ctx.params.todoId;
-  todos = todos.filter((todo) => {
-    return todo.id !== tid;
-  });
+router.delete("/todos/:todoId", async (ctx) => {
+  const tid = ctx.params.todoId!;
+
+  await getDb().collection("todos").deleteOne({ _id: ObjectId(tid) });
+
   ctx.response.body = { message: "Deleted todo" };
 });
 
